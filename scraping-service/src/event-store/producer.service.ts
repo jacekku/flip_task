@@ -10,7 +10,6 @@ export class EventStoreProducer {
   ) {}
   produce(sale: SaleEvent) {
     const newEvent = new this.saleModel(sale);
-
-    newEvent.updateOne();
+    newEvent.save((err) => {});
   }
 }

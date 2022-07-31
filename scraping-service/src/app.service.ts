@@ -24,8 +24,24 @@ export class AppService {
       fetch(pageUrl)
         .then((res) => res.json())
         .then((res) => this.mapToSaleEvents(res[0]))
-        .then((res) => this.newEvents(res));
+        .then((res) => this.newEvents(res))
+        .catch((e) => {
+          console.error('something went wrong with page ' + page + e);
+        });
     }
+  }
+
+  getAllSales() {
+    console.log('getting all sales');
+    fetch('https://recruitment-api.dev.flipfit.io/orders')
+      .then((res) => res.json())
+      .then((res) =>
+        res.map((element) => {
+          return this.mapToSaleEvents(element);
+        }),
+      )
+      .then((sales: any[]) => sales.flat(2))
+      .then((res) => this.newEvents(res));
   }
 
   mapToSaleEvents(sale: Sale) {

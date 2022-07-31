@@ -16,4 +16,8 @@ export class AppController {
   getSales(@Body() constraints: { pageMin: number; pageMax: number }) {
     return this.appService.getSales(constraints);
   }
+  @Post('/getAllSales')
+  getAllSales() {
+    return this.appService.getAllSales();
+  }
 }
