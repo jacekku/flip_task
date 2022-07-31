@@ -165,3 +165,26 @@ Scraping service will publish each event to kafka
 Every service will connect to kafka and read the events stored there everytime service is started, then do the processing as described above
 
 I have never used kafka so we will see how it goes
+
+## Diagram
+
+### Storing events
+```
+title Storing 
+
+RecruitmentEndpoint -> Scraping Service: Sale Data
+Scraping Service -> Kafka: Sale Event1
+Scraping Service -> Kafka: Sale Event2
+Scraping Service -> Kafka: Sale Event3
+Kafka -> Service1: Sale Event1
+Kafka -> Service1: Sale Event2
+Kafka -> Service1: Sale Event3
+Kafka -> Service2: Sale Event1
+Kafka -> Service2: Sale Event2
+Kafka -> Service2: Sale Event3
+Kafka -> Service3: Sale Event1
+Kafka -> Service3: Sale Event2
+Kafka -> Service3: Sale Event3
+```
+
+![storing.png](diagrams/storing.png)
