@@ -14,7 +14,7 @@ export class TotalBoughtService implements OnModuleInit {
     private totalBoughtModel: Model<TotalBoughtDocument>,
   ) {}
   onModuleInit() {
-    this.totalBoughtModel.collection.drop();
+    this.totalBoughtModel.collection.deleteMany({});
   }
 
   async incrementTotal(sale: SaleEvent) {

@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { StatsService } from './stats.service';
 import { EventStoreModule } from './event-store/event-store.module';
 import { TotalBoughtModule } from './total-store/total-bought.module';
 
@@ -14,6 +14,6 @@ import { TotalBoughtModule } from './total-store/total-bought.module';
     TotalBoughtModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [StatsService],
 })
 export class AppModule {}

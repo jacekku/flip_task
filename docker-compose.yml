@@ -1,0 +1,26 @@
+version: "3.3"
+
+services:
+  scraping-service:
+    container_name: scraping-service
+    image: scraping-service:latest
+    build: ./scraping-service/Dockerfile
+    command: npm run start:prod
+    networks:
+      - flip-network
+    ports:
+      - 3000:3000
+    environment:
+      MONGO_HOST: flip_task #name of container with mongodb
+      MONGO_PORT: 27017
+      MONGO_DB_NAME: warlordsOnline
+  flip_task:
+    container_name: flip_task
+    image: mongo
+    ports:
+      - 27017:27017
+    networks:
+      - flip-network
+
+networks:
+  flip-network:
