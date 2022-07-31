@@ -4,18 +4,31 @@ services:
   scraping-service:
     container_name: scraping-service
     image: scraping-service:latest
-    build: ./scraping-service/Dockerfile
+    build: ./scraping-service
+    command: npm run start:prod
+    networks:
+      - flip-network
+    ports:
+      - 3001:3000
+    environment:
+      MONGO_HOST: flip_task_mongodb #name of container with mongodb
+      MONGO_PORT: 27017
+      MONGO_DB_NAME: flip_task
+  stats-service:
+    container_name: stats-service
+    image: stats-service:latest
+    build: ./stats-service
     command: npm run start:prod
     networks:
       - flip-network
     ports:
       - 3000:3000
     environment:
-      MONGO_HOST: flip_task #name of container with mongodb
+      MONGO_HOST: flip_task_mongodb #name of container with mongodb
       MONGO_PORT: 27017
-      MONGO_DB_NAME: warlordsOnline
-  flip_task:
-    container_name: flip_task
+      MONGO_DB_NAME: flip_task
+  flip_task_mongodb:
+    container_name: flip_task_mongodb
     image: mongo
     ports:
       - 27017:27017

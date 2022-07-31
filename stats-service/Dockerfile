@@ -7,7 +7,6 @@ WORKDIR /home/node
 COPY . /home/node
 
 RUN npm install 
-RUN chown -Rh 777 /home/node
 RUN npm run prebuild 
 RUN npm run build
 RUN npm prune --production

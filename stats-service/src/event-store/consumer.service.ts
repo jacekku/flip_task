@@ -25,8 +25,6 @@ export class EventStoreConsumer implements OnApplicationBootstrap {
   async collectionWatch() {
     const size = await this.saleModel.collection.countDocuments({});
     if (this.collectionSize < size) {
-      console.log('New Event: ' + size);
-
       const addedDocs = await this.saleModel.collection
         .find({})
         .sort({ _id: -1 })
@@ -36,7 +34,6 @@ export class EventStoreConsumer implements OnApplicationBootstrap {
         doc != null;
         doc = await addedDocs.next()
       ) {
-        console.log(doc._id);
         this.eventEmitter.emitAsync('sale', doc);
       }
       this.collectionSize = size;
