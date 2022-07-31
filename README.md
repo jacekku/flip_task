@@ -151,20 +151,13 @@ Get all the sales page by page and store them (?)
 
 Store them in db, whenever a new service wants to startup they can use this service to send them the events
 
-
 ### Messaging service
 
 Since this is should be event-driven, a messaging service should be used for transporting events
 
-~~i will use rabbitMQ since i have experience using it~~
+Scraping service will publish each event to mongoDB
 
-Did some googling and decided i will use kafka since it is made for storing large amounts of event data
-
-Scraping service will publish each event to kafka
-
-Every service will connect to kafka and read the events stored there everytime service is started, then do the processing as described above
-
-I have never used kafka so we will see how it goes
+Every service will connect to mongoDB and read the events stored there everytime service is started, then do the processing as described above
 
 ## Diagram
 
@@ -173,18 +166,18 @@ I have never used kafka so we will see how it goes
 title Storing 
 
 RecruitmentEndpoint -> Scraping Service: Sale Data
-Scraping Service -> Kafka: Sale Event1
-Scraping Service -> Kafka: Sale Event2
-Scraping Service -> Kafka: Sale Event3
-Kafka -> Service1: Sale Event1
-Kafka -> Service1: Sale Event2
-Kafka -> Service1: Sale Event3
-Kafka -> Service2: Sale Event1
-Kafka -> Service2: Sale Event2
-Kafka -> Service2: Sale Event3
-Kafka -> Service3: Sale Event1
-Kafka -> Service3: Sale Event2
-Kafka -> Service3: Sale Event3
+Scraping Service -> DB: Sale Event1
+Scraping Service -> DB: Sale Event2
+Scraping Service -> DB: Sale Event3
+DB -> Service1: Sale Event1
+DB -> Service1: Sale Event2
+DB -> Service1: Sale Event3
+DB -> Service2: Sale Event1
+DB -> Service2: Sale Event2
+DB -> Service2: Sale Event3
+DB -> Service3: Sale Event1
+DB -> Service3: Sale Event2
+DB -> Service3: Sale Event3
 ```
 
 ![storing.png](diagrams/storing.png)
